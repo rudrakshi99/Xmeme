@@ -15,10 +15,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '#%^pyt*s7f^rg=w!i@p%f=by%i3st%y+swmdink1oi2ilrz9at'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1", "xmeme-rudrakshi.herokuapp.com"]
-
 
 # Application definition
 
