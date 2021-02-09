@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'xmeme_api'
+    'xmeme_api',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -103,8 +104,12 @@ USE_L10N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+
+CORS_ORIGIN_ALLOW_ALL = True # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
+CORS_ALLOW_CREDENTIALS = True
 
 # Activate Heroku settings for Django
 django_heroku.settings(locals())

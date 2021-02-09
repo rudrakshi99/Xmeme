@@ -8,7 +8,7 @@ from rest_framework import status
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
-
+from rest_framework.generics import GenericAPIView
 
 # The generic views provided by Django REST framework allow you to quickly build API views that map closely to your database models.
 
@@ -16,7 +16,7 @@ from rest_framework import serializers
 ## ------------------- GenericAPIview for GET and POST requests -------------------------##
 class MemeAPIView(generics.ListCreateAPIView):
     serializer_class = MemeSerializer                                   # include the MemeSerializer class
-    queryset = Meme.objects.all()[:100]                                 # get the latest 100 memes created by the backend
+    queryset = Meme.objects.all().order_by('-id')[:100]                 # get the latest 100 memes created by the backend
     
     # GET the list of memes
     def list(self, request):
@@ -28,11 +28,18 @@ class MemeAPIView(generics.ListCreateAPIView):
     # POST the meme
     def create(self, request):
         serializer = MemeSerializer(data=request.data)  # convert complex data by passing into serializer
-        url = serializer['url']                         # get the url value
         if serializer.is_valid():                       # check for validation of data
-            serializer.save()
+            new_name=serializer.data['name']
+            new_caption=serializer.data['caption']
+            new_url=serializer.data['url']
+            duplicate_meme=Meme.objects.filter(name=new_name,caption=new_caption,url=new_url)  # check the duplicate meme
+
+            if duplicate_meme.exists():
+                return Response("Duplicate Values of Meme",status=status.HTTP_409_CONFLICT)   # return http status 409 for duplication
+            
+            serializer.save()                      
             validate = URLValidator() 
-            value = serializer['url'] 
+            value = serializer['url']                                           # get the url value
             
             if value:                                                           # check for valid url 
                 try:
@@ -77,5 +84,12 @@ class MemeUpdateAPIView(generics.RetrieveUpdateAPIView):
             serializer.save()
             return Response(serializer.data)                        # return updated the JSON response
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # return error for invalid data
+     
     
- 
+    def delete(self,request,id):
+        try:                                                        # check if meme exist
+            meme = Meme.objects.get(id=id)
+        except Meme.DoesNotExist:
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)   # return http status 404 if meme doesn't exist
+        meme.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)          # return http status 204 
