@@ -1,2 +1,1 @@
-web: gunicorn xmeme_api.wsgi -log-file -
-
+web: gunicorn XmemeBackend.wsgi

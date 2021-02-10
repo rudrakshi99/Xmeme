@@ -29,24 +29,23 @@ class MemeAPIView(generics.ListCreateAPIView):
     def create(self, request):
         serializer = MemeSerializer(data=request.data)  # convert complex data by passing into serializer
         if serializer.is_valid():                       # check for validation of data
-            new_name=serializer.data['name']
-            new_caption=serializer.data['caption']
-            new_url=serializer.data['url']
+            new_name=request.data['name']
+            new_caption=request.data['caption']
+            new_url=request.data['url']
             duplicate_meme=Meme.objects.filter(name=new_name,caption=new_caption,url=new_url)  # check the duplicate meme
 
             if duplicate_meme.exists():
                 return Response("Duplicate Values of Meme",status=status.HTTP_409_CONFLICT)   # return http status 409 for duplication
-            
-            serializer.save()                      
+            serializer.save()          
             validate = URLValidator() 
-            value = serializer['url']                                           # get the url value
+            value = serializer.data['url']                                           # get the url value
             
             if value:                                                           # check for valid url 
                 try:
                     validate(value)
                 except ValidationError:
                     return HttpResponse(status=status.HTTP_400_BAD_REQUEST)     # return error for invalid url
-                         
+            
             return Response(serializer.data, status=status.HTTP_201_CREATED)    # return http satuts 201 when post is created successfully
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # return error for invalid data
 

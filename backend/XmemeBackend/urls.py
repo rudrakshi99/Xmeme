@@ -20,6 +20,6 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('xmeme_api.urls')),  # Included another URLconf of Xmeme 
+    path('', include('xmemeApi.urls')),  # Included another URLconf of Xmeme 
     path('swagger-ui/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),  # Included another URLconf of swagger api
 ]

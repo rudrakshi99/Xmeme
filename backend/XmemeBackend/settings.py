@@ -1,23 +1,19 @@
-
 from pathlib import Path
 import os
 import django_heroku
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#%^pyt*s7f^rg=w!i@p%f=by%i3st%y+swmdink1oi2ilrz9at'
+SECRET_KEY = '!bnv6y+es-s8#mhor-82zbxrd9%h$4#wl7n^7pw6qfu8tk$j1+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "xmeme-rudrakshi.herokuapp.com"]
+ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -29,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'xmeme_api',
+    'xmemeApi',
     'drf_yasg',
 ]
 
@@ -43,7 +39,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'backend.urls'
+ROOT_URLCONF = 'XmemeBackend.urls'
 
 TEMPLATES = [
     {
@@ -61,20 +57,22 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
+WSGI_APPLICATION = 'XmemeBackend.wsgi.application'
 
 
-# SQlite Database
+# Database
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME':  os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
 
 # Password validation
+# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -93,6 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
+# https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -105,11 +104,10 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 CORS_ORIGIN_ALLOW_ALL = True # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
 CORS_ALLOW_CREDENTIALS = True
