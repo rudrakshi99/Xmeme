@@ -25,15 +25,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }),
             })
             .then((response) => {
-                if (response != 201) {
-                    throw Error(response.statusText);
+                if (response.status === 409) {
+                    alert("Duplicate data")
+                    throw Error(response.status);
+                } else if (response.status === 400) {
+                    alert("Something went wrong :( ")
+                    throw Error(response.status);
                 }
                 return response.json();
             })
             .then((data) => {
-                if (data.url) {
-                    return alert(data.url)
-                }
+                alert("Meme submitted :)")
                 window.location.reload()
             })
             .catch((err) => {

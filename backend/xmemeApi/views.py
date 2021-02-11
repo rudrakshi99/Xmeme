@@ -22,7 +22,7 @@ class MemeAPIView(generics.ListCreateAPIView):
     def list(self, request):
         queryset = self.get_queryset()
         serializer = MemeSerializer(queryset, many=True)                 # convert complex data by passing into serializer
-        return Response(serializer.data, status=status.HTTP_201_CREATED) # return http satuts 201
+        return Response(serializer.data, status=status.HTTP_200_OK)      # return http satuts 201
     
     
     # POST the meme
