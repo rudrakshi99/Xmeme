@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" async></script>
+    <link rel="shortcut icon" href="icon.jpg" type="images/icon.jpg" />
     <title>XMeme</title>
 </head>
 
@@ -75,7 +76,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" value="submit">Submit</button>
+                    <button type="submit" class="btn btn-primary" value="submit" id="edit-submit">Submit</button>
                 </div>
             </div>
         </div>
@@ -105,22 +106,23 @@
         <div class="container text-center">
             <h1 class=" stream">MEME STREAM</h1>
             <div id="searchWrapper">
-                <input type="text" name="searchBar" id="searchBar" placeholder="search for a character" />
+                <input type="text" name="searchBar" id="searchBar" placeholder="search for owner or caption" />
             </div>
 
             <div class="meme-result">
                 <div id="meme">
                     <!-- start of meme item -->
-                    <div class="meme-item">
+                    <!-- <div class="meme-item">
                         <div class="meme-img">
                             <img src="https://image.freepik.com/free-vector/social-media-emojis-stickers_23-2148558484.jpg" alt="meme">
                         </div>
                         <div class="meme-name">
+                            <button class="btn btn-danger mx-2" data-bs-toggle="modal" id="delete-btn" type="button">Delete</button>
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" id="edit-btn" type="button">Edit</button>
                             <h3>Potato Chips</h3>
                             <p>Get Recipe</p>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- end of meme item-->
                 </div>
             </div>
