@@ -46,7 +46,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
 
         if (edit_btn) {
-            let edit_caption = parent.parentElement.children[1].children[2].textContent;
+            let edit_caption = parent.querySelector('p').textContent;
             let edit_url = parent.parentElement.children[0].children[0].getAttribute("src");
             document.getElementById("url-2").value = edit_url;
             document.getElementById("caption-2").value = edit_caption;
