@@ -14,9 +14,9 @@
     <title>XMeme</title>
 </head>
 
-<body class="bg-light">
+<body>
 
-    <!-- Modal -->
+    <!-- Modal 1 -->
     <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -45,12 +45,41 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-warning" id="submit-btn" value="submit">Submit</button>
+                    <button type="submit" class="btn btn-primary" id="submit-btn" value="submit">Submit</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal 2 -->
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title m-auto" id="exampleModalLabel2">Edit Meme</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="form-2">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Caption :</label>
+                            <input type="text" class="form-control" name="caption" id="caption-2">
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Meme Image URL :</label>
+                            <input type="text" class="form-control" name="url" id="url-2">
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" value="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <div class="container-fluid">
@@ -62,7 +91,7 @@
                     <div class="ball"></div>
                 </label>
             </div>
-            <a class="navbar-brand" style="color:aliceblue;" href="#">XMEME</a>
+            <a class="navbar-brand" href="#">XMEME</a>
             <form class="d-flex">
                 <button class="btn btn-outline-primary mx-3" data-bs-toggle="modal" data-bs-target="#add" type="button">Create Meme</button>
                 <a href="https://rudrakshi-xmeme.herokuapp.com/swagger-ui/" class="btn btn-outline-success" type="submit" role="button">Swagger</a>
@@ -74,20 +103,24 @@
 
     <section>
         <div class="container text-center">
-            <h1 class="my-4 stream">MEME STREAM</h1>
+            <h1 class=" stream">MEME STREAM</h1>
+            <div id="searchWrapper">
+                <input type="text" name="searchBar" id="searchBar" placeholder="search for a character" />
+            </div>
 
             <div class="meme-result">
                 <div id="meme">
                     <!-- start of meme item -->
-                    <!-- <div class="meme-item">
+                    <div class="meme-item">
                         <div class="meme-img">
                             <img src="https://image.freepik.com/free-vector/social-media-emojis-stickers_23-2148558484.jpg" alt="meme">
                         </div>
                         <div class="meme-name">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" id="edit-btn" type="button">Edit</button>
                             <h3>Potato Chips</h3>
                             <p>Get Recipe</p>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- end of meme item-->
                 </div>
             </div>

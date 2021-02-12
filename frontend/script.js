@@ -4,8 +4,56 @@ window.addEventListener('DOMContentLoaded', (event) => {
         document.body.classList.toggle('dark');
     });
 
+
     let memeStream = document.getElementById('meme')
     let btn = document.getElementById('submit-btn')
+    const searchBar = document.getElementById('searchBar');
+    let memeList = [];
+
+    searchBar.addEventListener('keyup', (e) => {
+        const searchString = e.target.value.toLowerCase();
+        const filteredCharacters = memeList.filter((meme) => {
+            return (
+                meme.name.toLowerCase().includes(searchString) ||
+                meme.caption.toLowerCase().includes(searchString)
+            );
+        });
+        displayCharacters(filteredCharacters);
+    });
+
+
+    memeStream.addEventListener('click', (e) => {
+        e.preventDefault();
+        let edit_btn = e.target.id == 'edit-btn';
+        let id = e.target.parentElement.dataset.id;
+        const parent = e.target.parentElement;
+        console.log(parent);
+        let edit_caption = parent.querySelector("caption").textContent;
+        let edit_url = parent.querySelector("url").textContent;
+        // console.log(edit_caption, edit_url);
+
+    })
+
+
+    const displayCharacters = (characters) => {
+        const htmlString = characters
+            .map((meme) => {
+                return `<div class="meme-item">
+                <div class="meme-img">
+                    <img src="${meme.url}" alt="meme">
+                </div>
+                <div class="meme-name" data-id=${meme.id}>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" id="edit-btn" type="button">Edit</button>
+                    <h3>${meme.name}</h3>
+                    <p>${meme.caption}</p>
+                </div>
+            </div>
+                `;
+            })
+            .join('');
+        memeStream.innerHTML = htmlString;
+    };
+
 
     btn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -32,6 +80,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     alert("Something went wrong :( ")
                     throw Error(response.status);
                 }
+
                 return response.json();
             })
             .then((data) => {
@@ -51,7 +100,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         <div class="meme-img">
             <img src="${meme.url}" alt="meme">
         </div>
-        <div class="meme-name">
+        <div class="meme-name" data-id=${meme.id}>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" id="edit-btn" type="button">Edit</button>
             <h3>${meme.name}</h3>
             <p>${meme.caption}</p>
         </div>
@@ -61,8 +111,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     fetch("https://rudrakshi-xmeme.herokuapp.com/memes/")
-        .then((response) => response.json())
+        .then((response) => {
+
+            return response.json();
+        })
         .then((data) => {
+            memeList = data
             displayMeme(data);
         });
 });
