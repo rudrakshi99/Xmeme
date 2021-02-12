@@ -1,7 +1,12 @@
+/* import google font */
+
 @import url('https://fonts.googleapis.com/css2?family=Frijole&display=swap');
 body {
     background: #001c4a;
 }
+
+
+/* navbar brand */
 
 .navbar-brand {
     font-family: 'Frijole', cursive;
@@ -10,9 +15,15 @@ body {
     font-weight: bold;
 }
 
+
+/* meme image card */
+
 .card {
     margin: 50px 0;
 }
+
+
+/* meme stream heading */
 
 .stream {
     background-image: linear-gradient(to right top, #cbd5e3, #c4cdde, #bdc5d8, #b7bdd3, #b2b5cd);
@@ -23,7 +34,7 @@ body {
 }
 
 
-/* ******** DARK MODE ******** */
+/* ******** DARK MODE TOGGLER ******** */
 
 body.dark {
     background: #15161a !important;
@@ -72,6 +83,9 @@ body.dark {
     color: #f39c12;
 }
 
+
+/* ******* Modal ******  */
+
 .modal-header {
     border: none;
     background: #001c4a;
@@ -81,6 +95,9 @@ body.dark {
 .modal-footer {
     border: none;
 }
+
+
+/* ***** Search bar ****** */
 
 #searchBar {
     width: 40%;
@@ -103,7 +120,7 @@ body.dark {
 }
 
 
-/* ******* item ******* */
+/* ******* Meme item ******* */
 
 #meme {
     margin: 2.4rem 0;
@@ -139,6 +156,9 @@ body.dark {
 .meme-name h3 {
     font-size: 1.4rem;
 }
+
+
+/* ****** Scroll Bar ****** */
 
 ::-webkit-scrollbar {
     width: 15px;

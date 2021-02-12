@@ -1,10 +1,12 @@
 window.addEventListener('DOMContentLoaded', (event) => {
+
+    /* ***************** Dark Mode Toggler ********************* */
     const chk = document.getElementById('chk');
     chk.addEventListener('change', () => {
         document.body.classList.toggle('dark');
     });
 
-
+    /* *********************** get DOM object ******************** */
     let memeStream = document.getElementById('meme')
     let btn = document.getElementById('submit-btn')
     const searchBar = document.getElementById('searchBar');
@@ -12,6 +14,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const del_btn = document.getElementById('delete-btn')
     let memeList = [];
 
+    /* ********************** Search Bar ********************** */
     searchBar.addEventListener('keyup', (e) => {
         const searchString = e.target.value.toLowerCase();
         const filteredCharacters = memeList.filter((meme) => {
@@ -23,7 +26,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         displayCharacters(filteredCharacters);
     });
 
-
+    /* ********************** Delete and Patch request ************ */
     memeStream.addEventListener('click', (e) => {
         e.preventDefault();
         let edit_btn = e.target.id == 'edit-btn';
@@ -31,6 +34,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         let id = e.target.parentElement.dataset.id;
         const parent = e.target.parentElement;
 
+        /* DELETE REQUEST */
         if (delete_btn) {
 
             fetch(`https://rudrakshi-xmeme.herokuapp.com/memes/${id}/`, {
@@ -48,6 +52,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             document.getElementById("caption-2").value = edit_caption;
         }
 
+        /* PATCH REQUEST */
         edit_submit.addEventListener('click', (e) => {
             var url = document.getElementById("url-2").value;
             var caption = document.getElementById("caption-2").value;
@@ -76,7 +81,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     })
 
-
+    /* Return searched elements */
     const displayCharacters = (characters) => {
         const htmlString = characters
             .map((meme) => {
@@ -97,7 +102,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         memeStream.innerHTML = htmlString;
     };
 
-
+    /* POST REQUEST */
     btn.addEventListener("click", (e) => {
         e.preventDefault();
         var name = document.getElementById("owner").value;
@@ -116,6 +121,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }),
             })
             .then((response) => {
+                /* Error Handling */
                 if (response.status === 409) {
                     alert("Duplicate data")
                     throw Error(response.status);
@@ -135,7 +141,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             });
     });
 
-
+    /* Display Memes */
     const displayMeme = function(data) {
         data.forEach(meme => {
             memeStream.innerHTML += `
@@ -154,6 +160,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         });
     }
 
+    /* GET REQUEST */
     fetch("https://rudrakshi-xmeme.herokuapp.com/memes/")
         .then((response) => response.json())
         .then((data) => {
