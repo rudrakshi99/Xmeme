@@ -14,6 +14,9 @@
 4. User can also delete the memes.
 5. Swagger-UI for API Documentation.
 
+![Device Viewports](https://user-images.githubusercontent.com/55245862/108157326-74e87300-7108-11eb-85c1-cd956a94b46a.png)
+
+
 # Frontend 
 ### Frontend Technologies used:
 - HTML
