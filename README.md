@@ -1,4 +1,6 @@
 # Xmeme
+[![codecov](https://codecov.io/gh/rudrakshi99/Xmeme/branch/master/graph/badge.svg?token=5aaa7c06-f800-42f5-9b5a-2e590bb72957)](https://codecov.io/gh/rudrakshi99/Xmeme)
+
 **XMEME** is a full stack web application to pull created memes using their URL and listing them on the page with the user’s name and caption.
 
 ## :fire: Features
